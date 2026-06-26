@@ -1,5 +1,8 @@
+![Icon](/public/assets/readme-icon-output.svg)
+
 # README.md Creator
 
+[https://readme-md-creator.vercel.app/](https://readme-md-creator.vercel.app/)
 A clean and practical README generator that lets users build customizable documentation pages without needing coding experience. The app gives a polished UI for composing markdown, previewing content, and managing a simulated repository workspace so anyone can generate professional README files quickly.
 
 ## Description
