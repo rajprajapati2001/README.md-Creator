@@ -63,6 +63,11 @@ import { README_TEMPLATES, TECH_ICONS } from "./data/templates";
 import { RAW_BADGES_DATA } from "./data/badges";
 import { WorkspaceFile, BadgeCreator, TechIcon } from "./types";
 
+const img1 = '/assets/img1.jpg';
+const img2 = '/assets/img2.jpg';
+const imgD1 = '/assets/img-d1.jpg';
+const imgD2 = '/assets/img-d2.jpg';
+
 const photo1 = "/assets/photo-1618005182384-a83a8bd57fbe.jpg";
 const photo2 = "/assets/photo-1551288049-bebda4e38f71.jpg";
 const photo3 = "/assets/photo-1531403009284-440f080d1e12.jpg";
@@ -1405,8 +1410,38 @@ Distributed under the **MIT License**. Created by Raj Prajapati.
 
     return processedMarkdown;
   };
+
+
+// SplashScreen
+
+const [isVisible, setIsVisible] = useState<boolean>(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 3000); // 3 seconds duration
+
+    return () => clearTimeout(timer);
+  }, []);
   
   return (
+    <>
+    {isVisible && (
+        <div className="splash-screen">
+          <div
+            className="logo-wrapper"
+            style={{
+              '--img1': `url(${img1})`,
+              '--img2': `url(${img2})`,
+              '--imgD1': `url(${imgD1})`,
+              '--imgD2': `url(${imgD2})`,
+            } as React.CSSProperties}
+          >
+            <img alt="Base Logo" className="logo base-logo" />
+            <img alt="Shadow Logo" className="logo reveal-logo" />
+          </div>
+        </div>
+      )}
     <div className="flex flex-col h-screen w-screen bg-[#0D1117] text-[#C9D1D9] font-sans overflow-hidden select-none">
       
       {/* Top Banner & Main Controls */}
@@ -2820,5 +2855,6 @@ Use this text area to craft premium markdown documentation..."
         </div>
       </footer>
     </div>
+    </>
   );
 }
