@@ -123,7 +123,8 @@ body {
   margin-bottom: 16px;
 }
 
-.gh-markdown-light th, .gh-markdown-light td {
+.gh-markdown-light th,
+.gh-markdown-light td {
   padding: 6px 13px;
   border: 1px solid #d0d7de;
 }
@@ -248,7 +249,8 @@ body {
   margin-bottom: 16px;
 }
 
-.gh-markdown-dark th, .gh-markdown-dark td {
+.gh-markdown-dark th,
+.gh-markdown-dark td {
   padding: 6px 13px;
   border: 1px solid #30363d;
 }
@@ -285,7 +287,6 @@ body {
 
 
 /* splash-screen */
-
 .splash-screen {
   position: fixed;
   top: 0;
@@ -322,23 +323,23 @@ body {
 
 @keyframes curtainDrop {
   0% {
-      clip-path: inset(0 0 100% 0);
+    clip-path: inset(0 0 100% 0);
   }
 
   100% {
-      clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
 @keyframes fadeOutSplash {
   0% {
-      opacity: 1;
+    opacity: 1;
   }
 
   100% {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 }
 
@@ -353,16 +354,16 @@ body {
 
 /* --- Desktop Image Swap (768px and wider) --- */
 @media (min-width: 768px) {
+
   .base-logo {
-      content: var(--imgD1);
+    content: var(--imgD1);
   }
 
   .reveal-logo {
-      content: var(--imgD2);
+    content: var(--imgD2);
   }
 
-  .logo {
-      object-fit: cover;
+  .logo{
+    object-fit: cover;
   }
-
 }
