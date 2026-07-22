@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&display=swap" rel="stylesheet">
+  <title>README.md Creator</title>
+
+  <style>
+    #splash-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0d1117;
+      transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    }
+
+    #splash-screen .background {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #splash-screen .background:before,
+    #splash-screen .background:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      animation: 4s infinite;
+      animation-name: g7-1, g7-2;
+    }
+
+    #splash-screen .background:after {
+      animation-name: g7-1, g7-3, g7-4;
+    }
+
+    @keyframes g7-2 {
+
+      0%,
+      50% {
+        background-image: radial-gradient(40px at 40px 40px, #5abaff 98%, #0000), radial-gradient(40px at 40px 40px, #5abaff 98%, #0000);
+        background-color: #0d1117;
+      }
+
+      50.1%,
+      100% {
+        background-image: radial-gradient(40px at 40px 40px, #0d1117 98%, #0000), radial-gradient(40px at 40px 40px, #0d1117 98%, #0000);
+        background-color: #5abaff;
+      }
+    }
+
+    @keyframes g7-3 {
+
+      0%,
+      50% {
+        background-image: conic-gradient(at 80px 80px, #0000 270deg, #5abaff 0), conic-gradient(at 80px 80px, #0000 270deg, #5abaff 0);
+      }
+
+      50.1%,
+      100% {
+        background-image: conic-gradient(at 80px 80px, #0000 270deg, #0d1117 0), conic-gradient(at 80px 80px, #0000 270deg, #0d1117 0);
+      }
+    }
+
+    @keyframes g7-1 {
+
+      0%,
+      10% {
+        background-position: 50% 50%, calc(50% - 80px) calc(50% - 80px);
+        background-size: 160px 160px;
+      }
+
+      16.67% {
+        background-position: 50% 50%, calc(50% - 120px) calc(50% - 120px);
+        background-size: 240px 240px;
+      }
+
+      33.33% {
+        background-position: 50% calc(50% - 240px), calc(50% - 120px) calc(50% + 120px);
+        background-size: 240px 240px;
+      }
+
+      33.34% {
+        background-position: 50% 50%, calc(50% - 120px) calc(50% - 120px);
+        background-size: 240px 240px;
+      }
+
+      45%,
+      50% {
+        background-position: 50% 50%, calc(50% - 80px) calc(50% - 80px);
+        background-size: 160px 160px;
+      }
+
+      50.01%,
+      55% {
+        background-position: calc(50% + 80px) 50%, 50% calc(50% - 80px);
+        background-size: 160px 160px;
+      }
+
+      66.66% {
+        background-position: calc(50% + 120px) 50%, 50% calc(50% - 120px);
+        background-size: 240px 240px;
+      }
+
+      83.33% {
+        background-position: calc(50% - 120px) 50%, calc(50% + 240px) calc(50% - 120px);
+        background-size: 240px 240px;
+      }
+
+      83.34% {
+        background-position: calc(50% + 120px) 50%, 50% calc(50% - 120px);
+        background-size: 240px 240px;
+      }
+
+      90%,
+      100% {
+        background-position: calc(50% + 80px) 50%, 50% calc(50% - 80px);
+        background-size: 160px 160px;
+      }
+    }
+
+    @keyframes g7-4 {
+
+      10%,
+      45%,
+      55%,
+      90% {
+        opacity: 1;
+      }
+
+      16.67%,
+      33.34%,
+      66.66%,
+      83.34% {
+        opacity: 0;
+      }
+    }
+
+    #splash-screen .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background-color: rgba(13, 17, 23, 0.5);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 10px;
+      border: 1px solid #ffffff3e;
+      padding: 3rem;
+      z-index: 10;
+    }
+
+    #splash-screen .stroke-text {
+      position: relative;
+      color: #FFFFFF;
+      z-index: 2;
+    }
+
+    #splash-screen .stroke-text::before {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      color: #000000;
+      -webkit-text-stroke: 14px #000000;
+      text-shadow: 0 0 2px #000000;
+    }
+
+    #splash-screen .text-readme {
+      font-family: 'Anton', sans-serif;
+      font-size: 117px;
+      line-height: 0.85;
+      letter-spacing: 2px;
+    }
+
+    #splash-screen .bottom-group {
+      display: flex;
+      align-items: flex-end;
+      margin-top: 5px;
+    }
+
+    #splash-screen .text-md {
+      font-family: 'Anton', sans-serif;
+      font-size: 117px;
+      line-height: 0.99;
+    }
+
+    #splash-screen .text-creator {
+      font-family: 'Pacifico', cursive;
+      font-size: 76px;
+      line-height: 0.7;
+      margin-left: 11px;
+      margin-bottom: 30px;
+      transform: rotate(-15deg);
+    }
+
+    #splash-screen .text-creator::before {
+      -webkit-text-stroke: 9px #000000;
+    }
+
+    #splash-screen .icon-pencil {
+      width: 47px;
+      height: 47px;
+      margin-bottom: 70px;
+      transform: rotate(10deg);
+    }
+
+    #splash-screen .icon-pencil path {
+      fill: #FFFFFF;
+      stroke: #000000;
+      stroke-width: 2.5px;
+      stroke-linejoin: round;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="splash-screen">
+    <div class="background">
+      <div class="logo-container">
+        <div class="stroke-text text-readme" data-text="README">README</div>
+        <div class="bottom-group">
+          <div class="stroke-text text-md" data-text=".md">.md</div>
+          <div class="stroke-text text-creator" data-text="Creator">Creator</div>
+          <svg class="icon-pencil" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19.06 3.59L20.41 4.94C21.2 5.72 21.2 6.99 20.41 7.77L7.18 21H3V16.82L16.23 3.59C17.01 2.81 18.28 2.81 19.06 3.59Z" />
+            <path d="M15 5L19 9" />
+            <path d="M4 16L8 20" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
