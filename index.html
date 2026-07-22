@@ -18,6 +18,8 @@
       align-items: center;
       background-color: #0d1117;
       transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+      padding: 1rem;
+      box-sizing: border-box;
     }
 
     #splash-screen .background {
@@ -154,7 +156,8 @@
       -webkit-backdrop-filter: blur(12px);
       border-radius: 10px;
       border: 1px solid #ffffff3e;
-      padding: 3rem;
+      padding: clamp(2rem, 5vw, 3rem);
+      box-sizing: border-box;
       z-index: 10;
     }
 
@@ -171,13 +174,13 @@
       top: 0;
       z-index: -1;
       color: #000000;
-      -webkit-text-stroke: 14px #000000;
+      -webkit-text-stroke: clamp(8px, 1.8vw, 14px) #000000;
       text-shadow: 0 0 2px #000000;
     }
 
     #splash-screen .text-readme {
       font-family: 'Anton', sans-serif;
-      font-size: 117px;
+      font-size: clamp(68px, 16vw, 117px);
       line-height: 0.85;
       letter-spacing: 2px;
     }
@@ -186,32 +189,34 @@
       display: flex;
       align-items: flex-end;
       margin-top: 5px;
+      width: 100%;
     }
 
     #splash-screen .text-md {
       font-family: 'Anton', sans-serif;
-      font-size: 117px;
+      font-size: clamp(68px, 16vw, 117px);
       line-height: 0.99;
     }
 
     #splash-screen .text-creator {
       font-family: 'Pacifico', cursive;
-      font-size: 76px;
+      font-size: clamp(42px, 10vw, 76px);
       line-height: 0.7;
-      margin-left: 11px;
-      margin-bottom: 30px;
+      margin-left: clamp(6px, 1.5vw, 11px);
+      margin-bottom: clamp(16px, 4vw, 30px);
       transform: rotate(-15deg);
     }
 
     #splash-screen .text-creator::before {
-      -webkit-text-stroke: 9px #000000;
+      -webkit-text-stroke: clamp(6px, 1.2vw, 9px) #000000;
     }
 
     #splash-screen .icon-pencil {
-      width: 47px;
-      height: 47px;
-      margin-bottom: 70px;
+      width: clamp(28px, 6.5vw, 47px);
+      height: clamp(28px, 6.5vw, 47px);
+      margin-bottom: clamp(38px, 9vw, 70px);
       transform: rotate(10deg);
+      flex-shrink: 0;
     }
 
     #splash-screen .icon-pencil path {
@@ -219,6 +224,29 @@
       stroke: #000000;
       stroke-width: 2.5px;
       stroke-linejoin: round;
+    }
+
+    @media (max-width: 600px) {
+      #splash-screen .logo-container {
+        padding: 1.75rem 1.25rem;
+        transform: translateY(-50px);
+      }
+
+      #splash-screen .text-readme,
+      #splash-screen .text-md {
+        font-size: clamp(62px, 18.5vw, 90px);
+      }
+
+      #splash-screen .text-creator {
+        font-size: clamp(38px, 11.5vw, 55px);
+        margin-bottom: 20px;
+      }
+
+      #splash-screen .icon-pencil {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 45px;
+      }
     }
   </style>
 
