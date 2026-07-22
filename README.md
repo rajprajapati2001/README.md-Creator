@@ -1,4 +1,4 @@
-![Icon](/public/assets/readme-icon-output.svg)
+![Icon](/public/assets/readme-icon-output.svg)  .
 
 # README.md Creator
 
