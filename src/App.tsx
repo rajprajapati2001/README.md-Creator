@@ -98,7 +98,7 @@ export default function App() {
           splashScreen.remove();
         }, 500);
         
-      }, 3000); // <-- 5 second delay added here
+      }, 3500); // <-- 5 second delay added here
     }
   }, []);
 
