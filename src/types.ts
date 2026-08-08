@@ -12,7 +12,7 @@ export interface ReadmeTemplate {
   name: string;
   description: string;
   content: string;
-  category: 'general' | 'minimal' | 'modern' | 'developer' | 'academic';
+  category: 'general' | 'minimal' | 'modern' | 'developer' | 'academic' | 'original';
   tags: string[];
 }
 

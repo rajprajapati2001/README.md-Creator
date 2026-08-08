@@ -1282,16 +1282,41 @@ Distributed under the **MIT License**. Created by Raj Prajapati.
 
   const findWorkspaceFileByPath = (path?: string | null): WorkspaceFile | null => {
     if (!path) return null;
-    const normalizedTarget = normalizePath(path);
-    return workspaceFiles.find(file => normalizePath(file.path) === normalizedTarget) || null;
+    let normalizedTarget = normalizePath(path);
+    if (normalizedTarget.startsWith("public/")) {
+      normalizedTarget = normalizedTarget.slice("public/".length);
+    }
+    return (
+      workspaceFiles.find(file => {
+        let filePath = normalizePath(file.path);
+        if (filePath.startsWith("public/")) {
+          filePath = filePath.slice("public/".length);
+        }
+        return filePath === normalizedTarget;
+      }) ||
+      workspaceFiles.find(file => normalizePath(file.path) === normalizePath(path)) ||
+      null
+    );
   };
 
   const resolveMarkdownContent = (rawMarkdown: string): string => {
-    return rawMarkdown || "";
+    if (!rawMarkdown) return "";
+    // On preview time, remove "public/" from paths (e.g. "public/assets/..." -> "assets/..." or "/public/..." -> "/...")
+    // This is for preview rendering only and does not affect the original raw content.
+    let content = rawMarkdown;
+    content = content.replace(/\/public\//g, "/");
+    content = content.replace(/\bpublic\//g, "");
+    return content;
   };
 
   const renderMarkdownLink = ({ href, children, ...props }: any) => {
-    const linkedFile = findWorkspaceFileByPath(href);
+    let normalizedHref = href || "";
+    if (normalizedHref.startsWith("/public/")) {
+      normalizedHref = normalizedHref.slice("/public".length);
+    } else if (normalizedHref.startsWith("public/")) {
+      normalizedHref = normalizedHref.slice("public/".length);
+    }
+    const linkedFile = findWorkspaceFileByPath(normalizedHref) || findWorkspaceFileByPath(href);
     if (linkedFile) {
       return (
         <a
@@ -1309,16 +1334,20 @@ Distributed under the **MIT License**. Created by Raj Prajapati.
     }
 
     return (
-      <a href={href ?? "#"} target="_blank" rel="noopener noreferrer" {...props}>
+      <a href={normalizedHref || href || "#"} target="_blank" rel="noopener noreferrer" {...props}>
         {children}
       </a>
     );
   };
 
   const renderMarkdownImage = ({ src, alt, ...props }: any) => {
-    // Strip /public prefix so "/public/assets/x.svg" → "/assets/x.svg" for browser resolution
-    const normalizedSrc = src?.startsWith('/public/') ? src.slice('/public'.length) : src;
-    const linkedFile = findWorkspaceFileByPath(normalizedSrc);
+    let normalizedSrc = src || "";
+    if (normalizedSrc.startsWith("/public/")) {
+      normalizedSrc = normalizedSrc.slice("/public".length);
+    } else if (normalizedSrc.startsWith("public/")) {
+      normalizedSrc = normalizedSrc.slice("public/".length);
+    }
+    const linkedFile = findWorkspaceFileByPath(normalizedSrc) || findWorkspaceFileByPath(src);
     if (linkedFile) {
       const imageSrc = resolveWorkspaceImageSource(linkedFile);
       if (imageSrc) {
@@ -1333,7 +1362,7 @@ Distributed under the **MIT License**. Created by Raj Prajapati.
     const firstChild = content[0];
 
     if (React.isValidElement(firstChild) && firstChild.type === 'p') {
-      const pChildren = React.Children.toArray(firstChild.props.children);
+      const pChildren = React.Children.toArray((firstChild as React.ReactElement<{ children?: React.ReactNode }>).props.children);
       const firstTextNode = pChildren[0];
 
       if (typeof firstTextNode === 'string') {
@@ -1377,7 +1406,7 @@ Distributed under the **MIT License**. Created by Raj Prajapati.
     );
   };
 
-  const renderWorkspaceFileNodes = (parentId: string | null, depth = 0): JSX.Element[] => {
+  const renderWorkspaceFileNodes = (parentId: string | null, depth = 0): React.ReactNode[] => {
     return workspaceFiles
       .filter(file => file.parentId === parentId)
       .sort((a, b) => {
@@ -2284,9 +2313,7 @@ Distributed under the **MIT License**. Created by Raj Prajapati.
                         type="file"
                         id="folder-uploader-input"
                         className="hidden"
-                        webkitdirectory="true"
-                        mozdirectory="true"
-                        directory="true"
+                        {...({ webkitdirectory: "true", mozdirectory: "true", directory: "true" } as any)}
                         onChange={async (e) => {
                           if (e.target.files && e.target.files.length > 0) {
                             await handleUploadedFiles(e.target.files);
