@@ -1517,7 +1517,7 @@ Distributed under the **MIT License**. Created by Raj Prajapati.
           <div className="w-px h-6 bg-[#30363D]"></div>
 
           <div className="flex items-center gap-2">
-            <img src="/assets/favicon.png" alt="icon" className="w-10 h-10 p-1.5 rounded" />
+            <img src="/assets/readme-icon-nobg.svg" alt="icon" className="w-10 h-10 p-1.5 rounded" />
             <div>
               <h1 className="text-sm hidden md:block font-bold text-white tracking-tight flex items-center gap-2">
                 README.md Creator
